@@ -14,7 +14,7 @@ y = 300
 def setup():
     global x, y
     frameRate(20)
-    size(x,y)
+    size(x, 500)
 def card():
     global data
     global choose
@@ -29,6 +29,14 @@ def card():
     text(data[choose][ran]['antwoorden']['B'], 30, 140)
     text(data[choose][ran]['antwoorden']['C'], 30, 180)
     text(data[choose][ran]['antwoorden']['D'], 30, 220)
+
+def scoreboard(listPlayers):
+    p = 1
+    ln = 400
+    for points in listPlayers:
+        text("Player " + str(p) + ": " + str(points) + " points", 100, ln)
+        p += 1
+        ln += 15
 
 def players():
     fill(192,192,192)
@@ -135,9 +143,11 @@ def draw():
     global data, choose, ran, chosenAns, chosenPlayers, listPlayers, cPlayer
     clear()
     print(choose) 
+     
+    scoreboard(listPlayers)
     if chosenPlayers == 0:
         players()
-    else: 
+    else:
         if choose != '':
             if chosenAns != '':
                 if data[choose][ran]['goed'] == chosenAns:
