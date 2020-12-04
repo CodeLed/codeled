@@ -2,19 +2,24 @@ import random
 from dictionary import quiz
 
 data = quiz.data
-choose = ''#groen
+choose = ''
 ran = -1
 chosenAns = ''
-chosenPlayers = 0
 listPlayers = []
 cPlayer = 0
-
+state = 'start'
+# start
+# throw
+# card
+# cardResult
+# reset
 x = 300
 y = 300
 def setup():
     global x, y
     frameRate(20)
     size(x, 500)
+
 def card():
     global data
     global choose
@@ -90,10 +95,10 @@ def result(res, points):
 
     
 def mousePressed():
-    global chosenAns, data, choose, chosenPlayers, listPlayers, cPlayer
+    global chosenAns, data, choose, state, listPlayers, cPlayer
     global ran
         #A, B, C, D
-    if chosenPlayers == 0:
+    if state == 'start':
         if 50 < mouseX < 50 + 80 and 50 < mouseY < 50 + 40:
             chosenPlayers = 1
             listPlayers = [0]
@@ -109,35 +114,40 @@ def mousePressed():
         elif 170 < mouseX < 170 + 80 and 150 < mouseY < 150 + 40:
             chosenPlayers = 4
             listPlayers = [0, 0, 0, 0]
+        state = 'throw'
+               
+    elif state == 'cardResult':
+        reset()  
+        cPlayer +=1 
+        if cPlayer >= len(listPlayers):
+            cPlayer = 0
+        state = 'throw'
             
-        else:
-            print("Click on the right button!")    
-    else:
-        if choose != '' and chosenAns != '':
-            reset()  
-            cPlayer +=1 
-            if cPlayer >= len(listPlayers):
-                cPlayer = 0
-        elif choose != '':
-            if 30 < mouseX < 300 and 85 <mouseY < 105:
-                chosenAns = 'A'
-            elif 30 < mouseX < 300 and 125 <mouseY < 145:
-                chosenAns = 'B'
-            elif 30 < mouseX < 300 and 165 <mouseY < 185:
-                chosenAns = 'C'
-            elif 30 < mouseX < 300 and 205 <mouseY < 225:
-                chosenAns = 'D'
+    elif state == 'card':
+        if 30 < mouseX < 300 and 85 <mouseY < 105:
+            chosenAns = 'A'
+        elif 30 < mouseX < 300 and 125 <mouseY < 145:
+            chosenAns = 'B'
+        elif 30 < mouseX < 300 and 165 <mouseY < 185:
+            chosenAns = 'C'
+        elif 30 < mouseX < 300 and 205 <mouseY < 225:
+            chosenAns = 'D'
+        if data[choose][ran]['goed'] == chosenAns:
+            listPlayers[cPlayer] += data[choose]["punten"]
+        state = 'cardResult'
             
-        else:
-            global x, y, choose
-            if 0 < mouseX < x / 2 and 0 <mouseY < y / 2:
-                choose = 'rood'
-            elif x / 2 < mouseX < x and 0 <mouseY < y / 2:
-                choose = 'groen'
-            elif 0 < mouseX < x / 2 and y / 2 <mouseY < y:
-                choose = 'geel'
-            elif x / 2 < mouseX < x and y / 2 <mouseY < y:
-                choose = 'oranje'
+    elif state == 'throw':
+        global x, y, choose
+        if 0 < mouseX < x / 2 and 0 <mouseY < y / 2:
+            choose = 'rood'
+        elif x / 2 < mouseX < x and 0 <mouseY < y / 2:
+            choose = 'groen'
+        elif 0 < mouseX < x / 2 and y / 2 <mouseY < y:
+            choose = 'geel'
+        elif x / 2 < mouseX < x and y / 2 <mouseY < y:
+            choose = 'oranje'
+        
+        state = 'card'
         
 def draw():
     global data, choose, ran, chosenAns, chosenPlayers, listPlayers, cPlayer
@@ -145,24 +155,22 @@ def draw():
     print(choose) 
      
     scoreboard(listPlayers)
-    if chosenPlayers == 0:
+    if state == 'start':
         players()
-    else:
-        if choose != '':
-            if chosenAns != '':
-                if data[choose][ran]['goed'] == chosenAns:
-                    print("goed")
-                    result("goed", data[choose]["punten"])
-                    listPlayers[cPlayer] = data[choose]["punten"]
-                else:
-                    result('fout', 0)
-                
-                print(cPlayer)
-                print(listPlayers)
-            else:
-                if ran == -1:
-                    print(len(data[choose]) -2)
-                    ran = random.randint(0, len(data[choose]) -2)
-                card()
+    elif state == 'cardResult':
+        if data[choose][ran]['goed'] == chosenAns:
+            print("goed")
+            result("goed", data[choose]["punten"])
+            
         else:
-            colorChoose()
+            result('fout', 0)
+        
+        print(cPlayer)
+        print(listPlayers)
+    elif state == 'card':
+        if ran == -1:
+            print(len(data[choose]) -2)
+            ran = random.randint(0, len(data[choose]) -2)
+        card()
+    elif state == 'throw':
+        colorChoose()
