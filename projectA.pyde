@@ -116,7 +116,7 @@ def mousePressed():
             listPlayers = [0, 0, 0, 0]
         state = 'throw'
                
-    elif state == 'reset':
+    elif state == 'cardResult':
         reset()  
         cPlayer +=1 
         if cPlayer >= len(listPlayers):
@@ -132,6 +132,8 @@ def mousePressed():
             chosenAns = 'C'
         elif 30 < mouseX < 300 and 205 <mouseY < 225:
             chosenAns = 'D'
+        if data[choose][ran]['goed'] == chosenAns:
+            listPlayers[cPlayer] += data[choose]["punten"]
         state = 'cardResult'
             
     elif state == 'throw':
@@ -144,7 +146,7 @@ def mousePressed():
             choose = 'geel'
         elif x / 2 < mouseX < x and y / 2 <mouseY < y:
             choose = 'oranje'
-        listPlayers[cPlayer] += data[choose]["punten"]
+        
         state = 'card'
         
 def draw():
