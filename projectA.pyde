@@ -22,8 +22,8 @@ def setup():
 
 def card():
     global data, choose, ran
-    # fill(255,255,255)
-    # rect(0,0,300, 250)
+    fill(255,255,255)
+    rect(0,0,300, 250)
     if choose == 'rood':
         fill(255,0,0)
         rect(0,0, 300,75)
@@ -110,9 +110,11 @@ def mousePressed():
     global ran
         #A, B, C, D
     if state == 'start':
+        pick = False
         if 50 < mouseX < 50 + 80 and 50 < mouseY < 50 + 40:
             chosenPlayers = 1
             listPlayers = [0]
+            pick = True
             
         elif 170 < mouseX < 170 + 80 and 50 < mouseY < 50 + 40:
             chosenPlayers = 2
