@@ -21,13 +21,24 @@ def setup():
     size(x, 500)
 
 def card():
-    global data
-    global choose
-    global ran
-    fill(255,255,255)
-    rect(0,0,300, 250)
-    fill(255,0,0)
-    rect(0,0, 300,75)
+    global data, choose, ran
+    # fill(255,255,255)
+    # rect(0,0,300, 250)
+    if choose == 'rood':
+        fill(255,0,0)
+        rect(0,0, 300,75)
+    elif choose == 'geel':
+        fill(255,255,0)
+        rect(0,0, 300,75)
+    elif choose == 'oranje':
+        fill(255,128,0)
+        rect(0,0, 300,75)
+    elif choose == 'groen':
+        fill(0,128,0)
+        rect(0,0, 300,75)
+    else:
+        fill(255,0,0)
+        rect(0,0, 300,75)
     fill(0)
     text(data[choose][ran]['vraag'], 30, 40)
     text(data[choose][ran]['antwoorden']['A'], 30, 100)
