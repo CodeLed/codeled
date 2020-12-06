@@ -5,7 +5,7 @@ class quiz:
             0: {
                 "vraag": "Hoe zou je de index van het laatste item in \neen array vinden?",
                 "antwoorden": {
-                    "A": "Door de lengte van de array te bereken en daar 1 van aftrekken",
+                    "A": "Door de lengte van de array te bereken \nen daar 1 van aftrekken",
                     "B": "Door je array  - 1 te doen",
                     "C": "Door een functie te gebruiken",
                     "D": "Geen van hierboven"
@@ -37,7 +37,7 @@ class quiz:
                 "antwoorden": {
                     "A": "Om data te printen",
                     "B": "Iets wat data structureel onthoud",
-                    "C": "Zodat je makkelijk data en coden kan vinden",
+                    "C": "Zodat je makkelijk data en coden \nkan vinden",
                     "D": "om het overzichterlijker te maken"
                 },
                 "goed": "B"
@@ -63,7 +63,7 @@ class quiz:
                         "goed": "D"
                         },
             6: {
-                "vraag": "Wat gebeurt er als een while loop geen break \nheeft?",
+                "vraag": "Wat gebeurt er als een while loop geen \nbreak heeft?",
                         "antwoorden": {
                                         "A": "Een if statement wordt uitgevoerd",
                                         "B": "Iets wat data onthoudt",
@@ -73,7 +73,7 @@ class quiz:
                         "goed": "C"
                         },
             7: {
-                "vraag": "In python, wat is de antwoord van 9 // 2?",
+                "vraag": "In python, wat is het antwoord van 9 // 2?",
                         "antwoorden": {
                                         "A": "4.5",
                                         "B": "4",
@@ -93,7 +93,7 @@ class quiz:
                         "goed": "C"
                         },
             9: {
-                "vraag": "Wat betekent het als je function(variabele = 1) \ndoet?",
+                "vraag": "Wat betekent het als je \nfunction(variabele = 1) doet?",
                         "antwoorden": {
                                         "A": "Een parameter",
                                         "B": "Een parameter met een standaard waarde",
@@ -108,7 +108,7 @@ class quiz:
                                         "A": "Data verplaatsten",
                                         "B": "Iets wat data onthoud",
                                         "C": "Strings aan elkaar plakken",
-                                        "D": "Een bepaald datatype veranderen naar een ander datatype"
+                                        "D": "Een bepaald datatype veranderen naar \neen ander datatype"
                                         },
                         "goed": "D"
                         },
@@ -143,7 +143,7 @@ class quiz:
                         "goed": "C"
                         },
             14: {
-                "vraag": "Wat mag NIET een variabele naam zijn in python?",
+                "vraag": "Wat mag NIET een variabele naam zijn \nin python?",
                         "antwoorden": {
                                         "A": "_my_var",
                                         "B": "MYVAR",
@@ -176,7 +176,7 @@ class quiz:
                         "goed": "A"
                         },
             2: {
-                "vraag": "Welke taal word het meeste gebruikt voor websites?",
+                "vraag": "Welke taal word het meeste gebruikt \nvoor websites?",
                         "antwoorden": {
                                         "A": "PHP",
                                         "B": "C#",
@@ -216,7 +216,7 @@ class quiz:
                         "goed": "C"
                         },
             6: {
-                "vraag": "Welke taal word het meeste gebruikt voor database?",
+                "vraag": "Welke taal word het meeste gebruikt \nvoor database?",
                         "antwoorden": {
                                         "A": "PHP",
                                         "B": "C#",
@@ -226,7 +226,7 @@ class quiz:
                         "goed": "D" 
                         },
             7: {
-                "vraag": "Welke taal word het meeste gebruikt voor website styling?",
+                "vraag": "Welke taal word het meeste gebruikt \nvoor website styling?",
                         "antwoorden": {
                                         "A": "HTML",
                                         "B": "CSS",
@@ -250,7 +250,7 @@ class quiz:
                         "antwoorden": {
                                         "A": "Een functie",
                                         "B": "Iets wat scripts toevoegd",
-                                        "C": "Een symbool dat vertelt om een specifieke functie",
+                                        "C": "Een symbool dat vertelt om een \nspecifieke functie",
                                         "D": "Een class"
                                         },
                         "goed": "C"
@@ -296,11 +296,11 @@ class quiz:
                         "goed": "C"
                         },
             14: {
-                "vraag": "In python, wat is het verschil op het antwoord tussen // en / ?",
+                "vraag": "In python, wat is het verschil op het antwoord \ntussen: // en / ?",
                         "antwoorden": {
-                                        "A": "// wordt een decimaal getal en / wordt een geheel getal",
+                                        "A": "// wordt een decimaal getal en \n/ wordt een geheel getal",
                                         "B": "// wordt een geheel getal en / ook",
-                                        "C": "// wordt een geheel getal en / wordt een decimaal getal",
+                                        "C": "// wordt een geheel getal en \n/ wordt een decimaal getal",
                                         "D": "Geen van boven"
                                         },
                         "goed": "C"
@@ -309,7 +309,7 @@ class quiz:
         "geel": {
             "punten": 2,
             0: {
-                "vraag": "Waarvoor zou je een Recursive functie schrijven?",
+                "vraag": "Waarvoor zou je een Recursive \nfunctie schrijven?",
                         "antwoorden": {
                                         "A": "Als er een conditie is",
                                         "B": "Als de code in een keer runt",
@@ -332,7 +332,7 @@ class quiz:
                 "vraag": "Waarom bestaat binair?",
                         "antwoorden": {
                                         "A": "Zodat computers data  kunnen opslaan",
-                                        "B": "Zodat ze meerdere programma's kunnen gebruiken",
+                                        "B": "Zodat ze meerdere programma's kunnen \ngebruiken",
                                         "C": "Wilde een nieuw systeem maken",
                                         "D": "Makkelijk voor een pc"
                                         },
@@ -359,7 +359,7 @@ class quiz:
                         "goed": "C"
                         },
             5: {
-                "vraag": "Welke taal worden IOS apps meestal mee gemaakt?",
+                "vraag": "Welke taal worden IOS apps meestal \nmee gemaakt?",
                         "antwoorden": {
                                         "A": "Kotlin",
                                         "B": "Java",
@@ -379,7 +379,7 @@ class quiz:
                         "goed": "B"
                         },
             7: {
-                "vraag": "Welke taal word meestal gebruikt om een besturingssystemen schrijven?",
+                "vraag": "Welke taal word meestal gebruikt om \nbesturingssystemen te schrijven?",
                         "antwoorden": {
                                         "A": "HTML",
                                         "B": "C",
@@ -392,7 +392,7 @@ class quiz:
                 "vraag": "Wat is een Tuple?",
                         "antwoorden": {
                                         "A": "Een collectie die geordend en veranderlijk is",
-                                        "B": "Een collectie die geordend en onveranderlijk is",
+                                        "B": "Een collectie die geordend en \nonveranderlijk is",
                                         "C": "Een lijst",
                                         "D": "Geen van hierboven"
                                         },
@@ -409,7 +409,7 @@ class quiz:
                         "goed": "C"
                         },
             10: {
-                "vraag": "Hoe verander je een getal naar string in python?",
+                "vraag": "Hoe verander je een getal naar string \nin python?",
                         "antwoorden": {
                                         "A": "string(getal)",
                                         "B": "str(getal)",
@@ -419,7 +419,7 @@ class quiz:
                         "goed": "B"
                         },
             11: {
-                "vraag": "In python, wordt 'and' of 'or' als eerst uitgevoerd in een 'if' statement?",
+                "vraag": "In python, wordt 'and' of 'or' als eerst \nuitgevoerd in een 'if' statement?",
                         "antwoorden": {
                                         "A": "and",
                                         "B": "or",
@@ -429,7 +429,7 @@ class quiz:
                         "goed": "A"
                         },
             12: {
-                "vraag": "Welk SQL statement gebruik je voor een overzicht van alles?",
+                "vraag": "Welk SQL statement gebruik je voor een \noverzicht van alles?",
                         "antwoorden": {
                                         "A": "INSERT",
                                         "B": "SELECT",
@@ -439,7 +439,7 @@ class quiz:
                         "goed": "C"
                         },
             13: {
-                "vraag": "Welk SQL statement gebruik je om iets te wijzigen?",
+                "vraag": "Welk SQL statement gebruik je om iets \nte wijzigen?",
                         "antwoorden": {
                                         "A": "CHANGE",
                                         "B": "INSERT",
@@ -572,7 +572,7 @@ class quiz:
                         "goed": "C"
                         },
             11: {
-                "vraag": "Welke operator wordt gebruikt voor multiplication in python?",
+                "vraag": "Welke operator wordt gebruikt voor \nmultiplication in python?",
                         "antwoorden": {
                                         "A": "*",
                                         "B": "-",
@@ -595,7 +595,7 @@ class quiz:
                 "vraag": "Wat betekent 3**4 in python?",
                         "antwoorden": {
                                         "A": "3 maal 4",
-                                        "B": "3 aan de macht van 4",
+                                        "B": "3 tot de macht 4",
                                         "C": "Alle getallen tussen 3 en 4",
                                         "D": "Geen van hierboven"
                                         },
