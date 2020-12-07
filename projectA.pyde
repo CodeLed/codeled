@@ -190,3 +190,5 @@ def draw():
     elif state == 'throw':
         colorChoose()
         showCurrentPlayerTurn(cPlayer)
+    elif state == 'end':
+        pass
