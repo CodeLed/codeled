@@ -12,7 +12,7 @@ state = 'start'
 # throw
 # card
 # cardResult
-# reset
+# end
 x = 300
 y = 300
 def setup():
@@ -128,7 +128,8 @@ def mousePressed():
         elif 170 < mouseX < 170 + 80 and 150 < mouseY < 150 + 40:
             chosenPlayers = 4
             listPlayers = [0, 0, 0, 0]
-        state = 'throw'
+        if len(listPlayers) > 0:
+            state = 'throw'
                
     elif state == 'cardResult':
         reset()  
@@ -148,7 +149,11 @@ def mousePressed():
             chosenAns = 'D'
         if data[choose][ran]['goed'] == chosenAns:
             listPlayers[cPlayer] += data[choose]["punten"]
-        state = 'cardResult'
+        
+        if listPlayers[cPlayer] > 3:
+            state = 'end'
+        else:
+            state = 'cardResult'
             
     elif state == 'throw':
         global x, y, choose
