@@ -73,7 +73,7 @@ class quiz:
                         "goed": "C"
                         },
             7: {
-                "vraag": "In python, wat is het antwoord van 9 // 2?",
+                "vraag": "In python, wat is de antwoord van 9 // 2?",
                         "antwoorden": {
                                         "A": "4.5",
                                         "B": "4",
@@ -113,7 +113,7 @@ class quiz:
                         "goed": "D"
                         },
             11: {
-                "vraag": "Waarvoor word Xamarin voor gebruikt?",
+                "vraag": "Waarvoor wordt Xamarin voor gebruikt?",
                         "antwoorden": {
                                         "A": "Websites ontwikkelen",
                                         "B": "Desktop apps ontwikkelen",
@@ -123,7 +123,7 @@ class quiz:
                         "goed": "D"
                         },
             12: {
-                "vraag": "Wat was het originele naam van Java?",
+                "vraag": "Wat was de originele naam van Java?",
                         "antwoorden": {
                                         "A": "Javascript",
                                         "B": "Oak",
@@ -176,7 +176,7 @@ class quiz:
                         "goed": "A"
                         },
             2: {
-                "vraag": "Welke taal word het meeste gebruikt \nvoor websites?",
+                "vraag": "Welke taal wordt het meeste gebruikt \nvoor websites?",
                         "antwoorden": {
                                         "A": "PHP",
                                         "B": "C#",
@@ -216,7 +216,7 @@ class quiz:
                         "goed": "C"
                         },
             6: {
-                "vraag": "Welke taal word het meeste gebruikt \nvoor database?",
+                "vraag": "Welke taal wordt het meeste gebruikt \nvoor database?",
                         "antwoorden": {
                                         "A": "PHP",
                                         "B": "C#",
@@ -226,7 +226,7 @@ class quiz:
                         "goed": "D" 
                         },
             7: {
-                "vraag": "Welke taal word het meeste gebruikt \nvoor website styling?",
+                "vraag": "Welke taal wordt het meeste gebruikt \nvoor website styling?",
                         "antwoorden": {
                                         "A": "HTML",
                                         "B": "CSS",
@@ -314,7 +314,7 @@ class quiz:
                                         "A": "Als er een conditie is",
                                         "B": "Als de code in een keer runt",
                                         "C": "Als een functie word aangeroepen",
-                                        "D": "Als een functie vaker in zich zelf wordt aangeroepen"
+                                        "D": "Als een functie vaker in zich zelf wordt \naangeroepen"
                                         },
                         "goed": "D"
                         },
