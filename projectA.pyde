@@ -12,7 +12,7 @@ state = 'start'
 # throw
 # card
 # cardResult
-# reset
+# end
 x = 300
 y = 300
 def setup():
@@ -135,7 +135,11 @@ def mousePressed():
             chosenAns = 'D'
         if data[choose][ran]['goed'] == chosenAns:
             listPlayers[cPlayer] += data[choose]["punten"]
-        state = 'cardResult'
+        
+        if listPlayers[cPlayer] > 3:
+            state = 'end'
+        else:
+            state = 'cardResult'
             
     elif state == 'throw':
         global x, y, choose
@@ -175,3 +179,5 @@ def draw():
         card()
     elif state == 'throw':
         colorChoose()
+    elif state == 'end':
+        pass
