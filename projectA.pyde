@@ -114,7 +114,8 @@ def mousePressed():
         elif 170 < mouseX < 170 + 80 and 150 < mouseY < 150 + 40:
             chosenPlayers = 4
             listPlayers = [0, 0, 0, 0]
-        state = 'throw'
+        if len(listPlayers) > 0:
+            state = 'throw'
                
     elif state == 'cardResult':
         reset()  
