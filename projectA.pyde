@@ -46,6 +46,9 @@ def card():
     text(data[choose][ran]['antwoorden']['C'], 30, 180)
     text(data[choose][ran]['antwoorden']['D'], 30, 220)
 
+def showCurrentPlayerTurn(current_player):
+    return text("This is the turn of player " + str(current_player + 1), 100, 380)
+
 def scoreboard(listPlayers):
     p = 1
     ln = 400
@@ -110,11 +113,9 @@ def mousePressed():
     global ran
         #A, B, C, D
     if state == 'start':
-        pick = False
         if 50 < mouseX < 50 + 80 and 50 < mouseY < 50 + 40:
             chosenPlayers = 1
             listPlayers = [0]
-            pick = True
             
         elif 170 < mouseX < 170 + 80 and 50 < mouseY < 50 + 40:
             chosenPlayers = 2
@@ -166,17 +167,18 @@ def draw():
     global data, choose, ran, chosenAns, chosenPlayers, listPlayers, cPlayer
     clear()
     print(choose) 
-     
+    
     scoreboard(listPlayers)
+    
     if state == 'start':
         players()
     elif state == 'cardResult':
         if data[choose][ran]['goed'] == chosenAns:
             print("goed")
-            result("goed", data[choose]["punten"])
+            return result("goed", data[choose]["punten"])
             
         else:
-            result('fout', 0)
+            return result('fout', 0)
         
         print(cPlayer)
         print(listPlayers)
@@ -187,3 +189,4 @@ def draw():
         card()
     elif state == 'throw':
         colorChoose()
+        showCurrentPlayerTurn(cPlayer)
