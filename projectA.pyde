@@ -7,6 +7,7 @@ ran = -1
 chosenAns = ''
 listPlayers = []
 cPlayer = 0
+dice = 0
 state = 'start'
 # start
 # throw
@@ -46,16 +47,31 @@ def card():
     text(data[choose][ran]['antwoorden']['C'], 30, 180)
     text(data[choose][ran]['antwoorden']['D'], 30, 220)
 
+def diceButton():
+    fill(192,192,192)
+    rect(110, 450, 80, 40)
+    fill(255,255,255)
+    text("Throw Dice", 120, 475)
+
+def throwDice():
+    dice = random.randint(1,6)
+    return dice
+
+def displayDice(throwDice):
+    global dice
+    if dice != 0:
+        return text("Dice thrown and got " + str(throwDice), 100, 350)
+
 def showCurrentPlayerTurn(current_player):
     return text("This is the turn of player " + str(current_player + 1), 100, 380)
 
 def scoreboard(listPlayers):
-    p = 1
-    ln = 400
+    player_number = 1
+    vertical_height = 400
     for points in listPlayers:
-        text("Player " + str(p) + ": " + str(points) + " points", 100, ln)
-        p += 1
-        ln += 15
+        text("Player " + str(player_number) + ": " + str(points) + " points", 100, vertical_height)
+        player_number += 1
+        vertical_height += 15
 
 def players():
     fill(192,192,192)
@@ -109,7 +125,7 @@ def result(res, points):
 
     
 def mousePressed():
-    global chosenAns, data, choose, state, listPlayers, cPlayer
+    global chosenAns, data, choose, state, listPlayers, cPlayer, dice
     global ran
         #A, B, C, D
     if state == 'start':
@@ -128,6 +144,11 @@ def mousePressed():
         elif 170 < mouseX < 170 + 80 and 150 < mouseY < 150 + 40:
             chosenPlayers = 4
             listPlayers = [0, 0, 0, 0]
+        
+         # Pure for testing!!!!!
+        elif 110 < mouseX < 110+ 80 and 450 < mouseY < 450 + 40:
+            dice = throwDice()
+            
         if len(listPlayers) > 0:
             state = 'throw'
                
@@ -149,7 +170,7 @@ def mousePressed():
             chosenAns = 'D'
         if data[choose][ran]['goed'] == chosenAns:
             listPlayers[cPlayer] += data[choose]["punten"]
-        
+            
         if listPlayers[cPlayer] > 3:
             state = 'end'
         else:
@@ -157,6 +178,7 @@ def mousePressed():
             
     elif state == 'throw':
         global x, y, choose
+        dice = 0
         if 0 < mouseX < x / 2 and 0 <mouseY < y / 2:
             choose = 'rood'
         elif x / 2 < mouseX < x and 0 <mouseY < y / 2:
@@ -169,14 +191,16 @@ def mousePressed():
         state = 'card'
         
 def draw():
-    global data, choose, ran, chosenAns, chosenPlayers, listPlayers, cPlayer
+    global data, choose, ran, chosenAns, chosenPlayers, listPlayers, cPlayer, dice
     clear()
     print(choose) 
-    
     scoreboard(listPlayers)
     
     if state == 'start':
         players()
+        # Placeholder area, for testing
+        diceButton()
+        displayDice(dice)
     elif state == 'cardResult':
         if data[choose][ran]['goed'] == chosenAns:
             print("goed")
