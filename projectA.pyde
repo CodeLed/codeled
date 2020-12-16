@@ -65,6 +65,9 @@ def displayDice(throwDice):
 def showCurrentPlayerTurn(current_player):
     return text("This is the turn of player " + str(current_player + 1), 100, 380)
 
+def showWinner(current_player):
+    return text("GAME ENDED. Player " + str(current_player + 1) + " WON!", 100, 380)
+
 def scoreboard(listPlayers):
     player_number = 1
     vertical_height = 400
@@ -220,4 +223,5 @@ def draw():
         colorChoose()
         showCurrentPlayerTurn(cPlayer)
     elif state == 'end':
-        pass
+        colorChoose()
+        showWinner(cPlayer)
