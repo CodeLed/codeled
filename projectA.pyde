@@ -190,8 +190,12 @@ def mousePressed():
             choose = 'geel'
         elif x / 2 < mouseX < x and y / 2 <mouseY < y:
             choose = 'oranje'
-        
         state = 'card'
+        
+    elif state == 'end':
+        if 0 < mouseX < 300 and 0 < mouseY < 500:
+            exit()
+        
         
 def draw():
     global data, choose, ran, chosenAns, chosenPlayers, listPlayers, cPlayer, dice
