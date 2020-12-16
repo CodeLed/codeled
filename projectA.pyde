@@ -75,6 +75,13 @@ def losers(winner, totalPlayers):
             loser.append(i)
     return text("Players " + str(loser) + " lost.", 100, 480)
 
+def losers(winner, totalPlayers):
+    loser = []
+    for i in range(1, len(totalPlayers) + 1):
+        if i != winner + 1:
+            loser.append(i)
+    return text("Players " + str(loser) + " lost.", 100, 480)
+
 def scoreboard(listPlayers):
     player_number = 1
     vertical_height = 400
