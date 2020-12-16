@@ -68,6 +68,20 @@ def showCurrentPlayerTurn(current_player):
 def showWinner(current_player):
     return text("GAME ENDED. Player " + str(current_player + 1) + " WON!", 100, 380)
 
+def losers(winner, totalPlayers):
+    loser = []
+    for i in range(1, len(totalPlayers) + 1):
+        if i != winner + 1:
+            loser.append(i)
+    return text("Players " + str(loser) + " lost.", 100, 480)
+
+def losers(winner, totalPlayers):
+    loser = []
+    for i in range(1, len(totalPlayers) + 1):
+        if i != winner + 1:
+            loser.append(i)
+    return text("Players " + str(loser) + " lost.", 100, 480)
+
 def scoreboard(listPlayers):
     player_number = 1
     vertical_height = 400
@@ -229,3 +243,4 @@ def draw():
     elif state == 'end':
         colorChoose()
         showWinner(cPlayer)
+        losers(cPlayer, listPlayers)
