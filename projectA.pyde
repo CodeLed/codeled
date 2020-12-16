@@ -234,7 +234,6 @@ def draw():
         colorChoose()
         showCurrentPlayerTurn(cPlayer)
     elif state == 'end':
-        #test
         colorChoose()
         showWinner(cPlayer)
         losers(cPlayer, listPlayers)
