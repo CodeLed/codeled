@@ -5,7 +5,7 @@ data = quiz.data
 choose = ''
 ran = -1
 chosenAns = ''
-listPlayers = []
+listPlayers = {}
 cPlayer = 0
 state = 'start'
 # start
@@ -13,12 +13,64 @@ state = 'start'
 # card
 # cardResult
 # end
-x = 300
+x = 1250
 y = 300
+boardX = 350
+boardY = 0
+boardWidth = 900
+boardHeight = 600
+boardPosBox = {}
 def setup():
-    global x, y
+    global x, y,  boardPosBox, boardX, boardY, boardWidth, boardHeight
     frameRate(20)
-    size(x, 500)
+    size(x, 600)
+    for i in range(1, 11):
+        val = boardPosBox[len(boardPosBox) - 1]['value'] if len(boardPosBox) - 1 > 0 else 'rood'
+        temp = {len(boardPosBox): {
+            'x' : boardX + boardWidth - i  * (boardWidth * 0.10) + (boardWidth * 0.025),
+            'y' : boardY + boardHeight - 80,
+            'value' : boxValue(val, len(boardPosBox) - 1)
+        }}
+        boardPosBox.update(temp)
+
+    for i in range(11, 15):
+        temp = {len(boardPosBox): {
+            'x' : boardX + 22.5,
+            'y' : (boardY + boardHeight) - i % 10 * 100 - 75,
+            'value' : boxValue(boardPosBox[len(boardPosBox) - 1]['value'], len(boardPosBox) - 1)
+        }}
+        boardPosBox.update(temp)
+    # print(len(boardPosBox))
+    for i in range(9, 0, -1):
+        temp = {len(boardPosBox): {
+            'x' : boardPosBox[i]['x'],
+            'y' : 25,
+            'value' : boxValue(boardPosBox[len(boardPosBox) - 1]['value'], len(boardPosBox) - 1)
+        }}
+        boardPosBox.update(temp)
+    for i in range(0,5):
+        temp = {len(boardPosBox): {
+            'x' :boardX + boardWidth - 65,
+            'y' : (boardY + 100 * i + 25),
+            'value' : boxValue(boardPosBox[len(boardPosBox) - 1]['value'], len(boardPosBox) - 1)
+        }}
+        boardPosBox.update(temp)
+
+def board():
+    global boardPosBox, boardX, boardY, boardWidth, boardHeight
+    image(loadImage("game.png"), boardX, boardY, boardWidth, boardHeight)
+    # print(boardPosBox)
+    for pos in boardPosBox:
+        choose = boardPosBox[pos]['value']
+        if choose == 'rood':
+            fill(255,0,0)
+        elif choose == 'geel':
+            fill(255,255,0)
+        elif choose == 'oranje':
+            fill(255,128,0)
+        elif choose == 'groen':
+            fill(0,128,0)
+        rect(boardPosBox[pos]['x'], boardPosBox[pos]['y'], 45, 50)
 
 def card():
     global data, choose, ran
@@ -50,7 +102,7 @@ def scoreboard(listPlayers):
     p = 1
     ln = 400
     for points in listPlayers:
-        text("Player " + str(p) + ": " + str(points) + " points", 100, ln)
+        text("Player " + str(p) + ": " + str(listPlayers[points]['points']) + " points", 100, ln)
         p += 1
         ln += 15
 
@@ -89,6 +141,23 @@ def colorChoose():
     fill(255,128,0)
     rect(x / 2,y / 2, x / 2, y / 2)
   
+def boxValue(colorName, id):
+    if id == -1:
+        return 'start'
+    elif id == 8:
+        return 'times2'
+    elif id == 13:
+        return 'minus4'
+    elif id == 22:
+        return 'times3'
+    elif colorName == 'rood' or colorName == 'start' or colorName == 'times2' or colorName == 'minus4' or colorName == 'times3':
+        return 'groen'
+    elif colorName == 'oranje':
+        return 'geel'
+    elif colorName == 'groen':
+        return 'oranje'
+    elif colorName == 'geel':
+        return 'rood'
 def reset():
     global choose, chosenAns, ran, chosenPlayers, listPlayers
     choose = chosenAns = ''
@@ -110,23 +179,21 @@ def mousePressed():
     global ran
         #A, B, C, D
     if state == 'start':
-        pick = False
         if 50 < mouseX < 50 + 80 and 50 < mouseY < 50 + 40:
             chosenPlayers = 1
-            listPlayers = [0]
-            pick = True
+            listPlayers = {0 : {'points' : 0, 'place': 0} }
             
         elif 170 < mouseX < 170 + 80 and 50 < mouseY < 50 + 40:
             chosenPlayers = 2
-            listPlayers = [0, 0]
+            listPlayers = {0 : {'points' : 0, 'place': 0}, 1 : {'points' : 0, 'place': 0} }
             
         elif 50 < mouseX < 50 + 80 and 150 < mouseY < 150 + 40:
             chosenPlayers = 3
-            listPlayers = [0, 0, 0]
+            listPlayers = {0 : {'points' : 0, 'place': 0}, 1 : {'points' : 0, 'place': 0}, 2 : {'points' : 0, 'place': 0} }
             
         elif 170 < mouseX < 170 + 80 and 150 < mouseY < 150 + 40:
             chosenPlayers = 4
-            listPlayers = [0, 0, 0, 0]
+            listPlayers = {0 : {'points' : 0, 'place': 0}, 1 : {'points' : 0, 'place': 0}, 2 : {'points' : 0, 'place': 0}, 3 : {'points' : 0, 'place': 0} }
         if len(listPlayers) > 0:
             state = 'throw'
                
@@ -147,9 +214,9 @@ def mousePressed():
         elif 30 < mouseX < 300 and 205 <mouseY < 225:
             chosenAns = 'D'
         if data[choose][ran]['goed'] == chosenAns:
-            listPlayers[cPlayer] += data[choose]["punten"]
+            listPlayers[cPlayer]['points'] += data[choose]["punten"]
         
-        if listPlayers[cPlayer] > 3:
+        if listPlayers[cPlayer]['points'] > 3:
             state = 'end'
         else:
             state = 'cardResult'
@@ -171,7 +238,8 @@ def draw():
     global data, choose, ran, chosenAns, chosenPlayers, listPlayers, cPlayer
     clear()
     print(choose) 
-     
+    if state != 'start':
+        board()
     scoreboard(listPlayers)
     if state == 'start':
         players()
