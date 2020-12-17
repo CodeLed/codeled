@@ -58,9 +58,9 @@ def setup():
         boardPosBox.update(temp)
 
 def board():
-    global boardPosBox, boardX, boardY, boardWidth, boardHeight
+    global boardPosBox, boardX, boardY, boardWidth, boardHeight, listPlayers
     image(loadImage("game.png"), boardX, boardY, boardWidth, boardHeight)
-    # print(boardPosBox)
+    print(boardPosBox)
     for pos in boardPosBox:
         choose = boardPosBox[pos]['value']
         if choose == 'rood':
@@ -71,7 +71,7 @@ def board():
             fill(255,128,0)
         elif choose == 'groen':
             fill(0,128,0)
-        rect(boardPosBox[pos]['x'], boardPosBox[pos]['y'], 45, 50)
+        #rect(boardPosBox[pos]['x'], boardPosBox[pos]['y'], 45, 50)
 
 def card():
     global data, choose, ran
@@ -112,7 +112,7 @@ def throwDice():
 def displayDice(throwDice):
     global dice
     if dice != 0:
-        return text("Dice thrown and got " + str(throwDice), 100, 350)
+        return text("Dice thrown and got " + str(throwDice), 100, 500)
 
 def showCurrentPlayerTurn(current_player):
     return text("This is the turn of player " + str(current_player + 1), 100, 380)
@@ -126,14 +126,8 @@ def losers(winner, totalPlayers):
         if i != winner + 1:
             loser.append(i)
     return text("Players " + str(loser) + " lost.", 100, 480)
-
-def losers(winner, totalPlayers):
-    loser = []
-    for i in range(1, len(totalPlayers) + 1):
-        if i != winner + 1:
-            loser.append(i)
-    return text("Players " + str(loser) + " lost.", 100, 480)
-
+    
+    
 def scoreboard(listPlayers):
     player_number = 1
     vertical_height = 400
@@ -263,30 +257,43 @@ def mousePressed():
             
     elif state == 'throw':
         global x, y, choose
-        dice = 0
-        if 0 < mouseX < x / 2 and 0 <mouseY < y / 2:
-            choose = 'rood'
-        elif x / 2 < mouseX < x and 0 <mouseY < y / 2:
-            choose = 'groen'
-        elif 0 < mouseX < x / 2 and y / 2 <mouseY < y:
-            choose = 'geel'
-        elif x / 2 < mouseX < x and y / 2 <mouseY < y:
-            choose = 'oranje'
-        state = 'card'
+        # if 0 < mouseX < x / 2 and 0 <mouseY < y / 2:
+        #     choose = 'rood'
+        # elif x / 2 < mouseX < x and 0 <mouseY < y / 2:
+        #     choose = 'groen'
+        # elif 0 < mouseX < x / 2 and y / 2 <mouseY < y:
+        #     choose = 'geel'
+        # elif x / 2 < mouseX < x and y / 2 <mouseY < y:
+        #     choose = 'oranje'
+        
+        # Pure for testing!!!!!
+        if 110 < mouseX < 110+ 80 and 450 < mouseY < 450 + 40:
+            dice = throwDice()
+            listPlayers[cPlayer]['place'] += dice
+            
+            ''' HERE COMES THE AUTOPICKER BASED ON YOUR PLACE. SO THE CHOOSE=ORANGE NEEDS TO CHANGE '''
+            
+            choose = boardPosBox[listPlayers[cPlayer]['place']]['value']
+            
+            ''' HERE COMES THE AUTOPICKER BASED ON YOUR PLACE. SO THE CHOOSE=ORANGE NEEDS TO CHANGE '''
+            print("THIS IS A TEST ", boardPosBox[listPlayers[cPlayer]['place']]['value'])
+            state = 'card'
+        else:
+            state = 'throw'
         
     elif state == 'end':
-        if 0 < mouseX < 300 and 0 < mouseY < 500:
+        if 0 < mouseX < 1250 and 0 < mouseY < 300:
             exit()
         
         
 def draw():
     global data, choose, ran, chosenAns, chosenPlayers, listPlayers, cPlayer, dice
     clear()
-    print(choose) 
+    # print(choose) 
     if state != 'start':
         board()
     scoreboard(listPlayers)
-    
+    displayDice(dice)
     if state == 'start':
         players()
         # Placeholder area, for testing
@@ -304,11 +311,14 @@ def draw():
         print(listPlayers)
     elif state == 'card':
         if ran == -1:
-            print(len(data[choose]) -2)
+            # print(len(data[choose]) -2)
             ran = random.randint(0, len(data[choose]) -2)
         card()
     elif state == 'throw':
-        colorChoose()
+        # colorChoose()
+        dice = 0
+        diceButton()
+        print(listPlayers)
         showCurrentPlayerTurn(cPlayer)
     elif state == 'end':
         colorChoose()
