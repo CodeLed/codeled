@@ -61,17 +61,23 @@ def board():
     global boardPosBox, boardX, boardY, boardWidth, boardHeight, listPlayers
     image(loadImage("game.png"), boardX, boardY, boardWidth, boardHeight)
     print(boardPosBox)
-    for pos in boardPosBox:
-        choose = boardPosBox[pos]['value']
-        if choose == 'rood':
-            fill(255,0,0)
-        elif choose == 'geel':
-            fill(255,255,0)
-        elif choose == 'oranje':
-            fill(255,128,0)
-        elif choose == 'groen':
-            fill(0,128,0)
+    # for pos in boardPosBox:
+    #     choose = boardPosBox[pos]['value']
+    #     if choose == 'rood':
+    #         fill(255,0,0)
+    #     elif choose == 'geel':
+    #         fill(255,255,0)
+    #     elif choose == 'oranje':
+    #         fill(255,128,0)
+    #     elif choose == 'groen':
+    #         fill(0,128,0)
         #rect(boardPosBox[pos]['x'], boardPosBox[pos]['y'], 45, 50)
+    for i in listPlayers:
+        print("this is a list: ", listPlayers[cPlayer]['place'])
+        pos = listPlayers[i]['place']
+        fill(0,128,0)
+        rect(boardPosBox[pos]['x'], boardPosBox[pos]['y'], 45, 50)
+        text("Player " + str(i+1), boardPosBox[pos]['x'], boardPosBox[pos]['y'],)
 
 def card():
     global data, choose, ran
