@@ -72,12 +72,14 @@ def board():
     #     elif choose == 'groen':
     #         fill(0,128,0)
         #rect(boardPosBox[pos]['x'], boardPosBox[pos]['y'], 45, 50)
-    for i in listPlayers:
+    
+    for i in listPlayers.items():
         print("this is a list: ", listPlayers[cPlayer]['place'])
-        pos = listPlayers[i]['place']
-        fill(0,128,0)
-        rect(boardPosBox[pos]['x'], boardPosBox[pos]['y'], 45, 50)
-        text("Player " + str(i+1), boardPosBox[pos]['x'], boardPosBox[pos]['y'],)
+        pos = listPlayers[i[0]]['place']
+        fill(i[1]['r'], i[1]['b'], i[1]['g'])
+        rect(boardPosBox[pos]['x'] + i[1]['x'], boardPosBox[pos]['y'] + i[1]['y'], 20, 20)
+        fill(0)
+        text(str(i[0]+1), boardPosBox[pos]['x'] + i[1]['x'] + 6, boardPosBox[pos]['y'] + i[1]['y'] + 13)
 
 def card():
     global data, choose, ran
@@ -137,6 +139,7 @@ def losers(winner, totalPlayers):
 def scoreboard(listPlayers):
     player_number = 1
     vertical_height = 400
+    fill(255,255,255)
     for points in listPlayers:
         text("Player " + str(player_number) + ": " + str(listPlayers[points]['points']) + " points", 100, vertical_height)
         player_number += 1
@@ -217,19 +220,25 @@ def mousePressed():
     if state == 'start':
         if 50 < mouseX < 50 + 80 and 50 < mouseY < 50 + 40:
             chosenPlayers = 1
-            listPlayers = {0 : {'points' : 0, 'place': 0} }
+            listPlayers = {0 : {'points' : 0, 'place': 0, 'x': 0, 'y': 0, 'r': 0, 'b': 128, 'g': 0}}
             
         elif 170 < mouseX < 170 + 80 and 50 < mouseY < 50 + 40:
             chosenPlayers = 2
-            listPlayers = {0 : {'points' : 0, 'place': 0}, 1 : {'points' : 0, 'place': 0} }
+            listPlayers = {0 : {'points' : 0, 'place': 0, 'x': 0, 'y': 0, 'r': 0, 'b': 128, 'g': 0}, 
+                           1 : {'points' : 0, 'place': 0, 'x': 30, 'y': 0, 'r': 255, 'b': 255, 'g': 0}}
             
         elif 50 < mouseX < 50 + 80 and 150 < mouseY < 150 + 40:
             chosenPlayers = 3
-            listPlayers = {0 : {'points' : 0, 'place': 0}, 1 : {'points' : 0, 'place': 0}, 2 : {'points' : 0, 'place': 0} }
+            listPlayers = {0 : {'points' : 0, 'place': 0, 'x': 0, 'y': 0, 'r': 0, 'b': 128, 'g': 0}, 
+                           1 : {'points' : 0, 'place': 0, 'x': 30, 'y': 0, 'r': 255, 'b': 255, 'g': 0}, 
+                           2 : {'points' : 0, 'place': 0, 'x': 0, 'y': 30, 'r': 255, 'b': 128, 'g': 0}}
             
         elif 170 < mouseX < 170 + 80 and 150 < mouseY < 150 + 40:
             chosenPlayers = 4
-            listPlayers = {0 : {'points' : 0, 'place': 0}, 1 : {'points' : 0, 'place': 0}, 2 : {'points' : 0, 'place': 0}, 3 : {'points' : 0, 'place': 0} }
+            listPlayers = {0 : {'points' : 0, 'place': 0, 'x': 0, 'y': 0, 'r': 0, 'b': 128, 'g': 0}, 
+                           1 : {'points' : 0, 'place': 0, 'x': 30, 'y': 0, 'r': 255, 'b': 255, 'g': 0}, 
+                           2 : {'points' : 0, 'place': 0, 'x': 0, 'y': 30, 'r': 255, 'b': 128, 'g': 0}, 
+                           3 : {'points' : 0, 'place': 0, 'x': 30, 'y': 30, 'r': 255, 'b': 0, 'g': 0}}
             
          # Pure for testing!!!!!
         elif 110 < mouseX < 110+ 80 and 450 < mouseY < 450 + 40:
