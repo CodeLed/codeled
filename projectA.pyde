@@ -198,13 +198,24 @@ def boxValue(colorName, id):
     elif colorName == 'geel':
         return 'rood'
 def reset():
-    global choose, chosenAns, ran, chosenPlayers, listPlayers
-    choose = chosenAns = ''
+    global choose, chosenAns, ran, listPlayers, dice, state, cPlayer
+    choose = ''
     ran = -1
+    chosenAns = ''
+    listPlayers = {}
+    cPlayer = 0
+    dice = 0
+    state = 'start'
+    
+def rematch():
+    fill(255)
+    rect(75, 50, 200, 75)
+    fill(0)
+    text("Wanna play again? Click on me! \n\n If not, click on anywhere else", 95, 75)
   
 def result(res, points):
     fill(255)
-    rect(50, 50,200,200)
+    rect(50, 50,200,100)
     fill(0)
     text("je antwoord is " + res, 80, 150)
     if points == 0:
@@ -247,7 +258,6 @@ def mousePressed():
             state = 'throw'
                
     elif state == 'cardResult':
-        reset()  
         cPlayer +=1 
         if cPlayer >= len(listPlayers):
             cPlayer = 0
@@ -297,7 +307,9 @@ def mousePressed():
             state = 'throw'
         
     elif state == 'end':
-        if 0 < mouseX < 1250 and 0 < mouseY < 300:
+        if 75 < mouseX < 275 and 50 < mouseY < 125:
+            reset()
+        else:
             exit()
         
         
@@ -336,6 +348,6 @@ def draw():
         print(listPlayers)
         showCurrentPlayerTurn(cPlayer)
     elif state == 'end':
-        colorChoose()
         showWinner(cPlayer)
         losers(cPlayer, listPlayers)
+        rematch()
