@@ -611,5 +611,18 @@ class quiz:
                                         },
                         "goed": "C"
                         },
+            },
+        "minus4": {
+            "punten" : -4,
+            0: {
+                "vraag": "verkeert geland -4 punten",
+                        "antwoorden": {
+                                        "A": "-4",
+                                        "B": "-4",
+                                        "C": "-4",
+                                        "D": "-4"
+                                        },
+                        "goed": "A"
+                        },
             }
         }

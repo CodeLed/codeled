@@ -41,7 +41,7 @@ def setup():
             'value' : boxValue(boardPosBox[len(boardPosBox) - 1]['value'], len(boardPosBox) - 1)
         }}
         boardPosBox.update(temp)
-    # print(len(boardPosBox))
+        
     for i in range(9, 0, -1):
         temp = {len(boardPosBox): {
             'x' : boardPosBox[i]['x'],
@@ -60,21 +60,7 @@ def setup():
 def board():
     global boardPosBox, boardX, boardY, boardWidth, boardHeight, listPlayers
     image(loadImage("game.png"), boardX, boardY, boardWidth, boardHeight)
-    print(boardPosBox)
-    # for pos in boardPosBox:
-    #     choose = boardPosBox[pos]['value']
-    #     if choose == 'rood':
-    #         fill(255,0,0)
-    #     elif choose == 'geel':
-    #         fill(255,255,0)
-    #     elif choose == 'oranje':
-    #         fill(255,128,0)
-    #     elif choose == 'groen':
-    #         fill(0,128,0)
-        #rect(boardPosBox[pos]['x'], boardPosBox[pos]['y'], 45, 50)
-    
     for i in listPlayers.items():
-        print("this is a list: ", listPlayers[cPlayer]['place'])
         pos = listPlayers[i[0]]['place']
         fill(i[1]['r'], i[1]['b'], i[1]['g'])
         rect(boardPosBox[pos]['x'] + i[1]['x'], boardPosBox[pos]['y'] + i[1]['y'], 20, 20)
@@ -109,9 +95,9 @@ def card():
 
 def diceButton():
     fill(192,192,192)
-    rect(110, 450, 80, 40)
+    rect(110, 450, 120, 40)
     fill(255,255,255)
-    text("Throw Dice", 120, 475)
+    text("Gooi dobbelsteen", 120, 475)
 
 def throwDice():
     dice = random.randint(1,6)
@@ -120,20 +106,20 @@ def throwDice():
 def displayDice(throwDice):
     global dice
     if dice != 0:
-        return text("Dice thrown and got " + str(throwDice), 100, 500)
+        return text("Dobbelsteen gegooit je gaat \nmet " + str(throwDice) + " stappen verder", 100, 500)
 
 def showCurrentPlayerTurn(current_player):
-    return text("This is the turn of player " + str(current_player + 1), 100, 380)
+    return text("De speler " + str(current_player + 1) + " is aan de beurt", 100, 380)
 
 def showWinner(current_player):
-    return text("GAME ENDED. Player " + str(current_player + 1) + " WON!", 100, 380)
+    return text("SPEL AFGELOPEN. Speler " + str(current_player + 1) + " heeft GEWONNEN!", 100, 380)
 
 def losers(winner, totalPlayers):
     loser = []
     for i in range(1, len(totalPlayers) + 1):
         if i != winner + 1:
             loser.append(i)
-    return text("Players " + str(loser) + " lost.", 100, 480)
+    return text("Spelers " + str(loser) + " hebben verloren.", 100, 480)
     
     
 def scoreboard(listPlayers):
@@ -141,7 +127,7 @@ def scoreboard(listPlayers):
     vertical_height = 400
     fill(255,255,255)
     for points in listPlayers:
-        text("Player " + str(player_number) + ": " + str(listPlayers[points]['points']) + " points", 100, vertical_height)
+        text("Speler " + str(player_number) + ": " + str(listPlayers[points]['points']) + " punten", 100, vertical_height)
         player_number += 1
         vertical_height += 15
 
@@ -149,36 +135,22 @@ def players():
     fill(192,192,192)
     rect(50, 50, 80, 40)
     fill(255,255,255)
-    text("One player", 60, 75)
+    text("Een spelers", 60, 75)
     
     fill(192,192,192)
     rect(170, 50, 80, 40)
     fill(255,255,255)
-    text("Two players", 180, 75)
+    text("Twee spelers", 180, 75)
     
     fill(192,192,192)
     rect(50, 150, 80, 40)
     fill(255,255,255)
-    text("Three players", 55, 175)
+    text("Drie spelers", 55, 175)
     
     fill(192,192,192)
     rect(170, 150, 80, 40)
     fill(255,255,255)
-    text("Four players", 180, 175)
-
-def colorChoose():
-    global x, y
-    fill(255,0,0)
-    rect(0,0, x / 2, y / 2)
-    
-    fill(0,128,0)
-    rect(x / 2,0, x / 2, y / 2)
-    
-    fill(255,255,0)
-    rect(0,y / 2, x / 2, y / 2)
-    
-    fill(255,128,0)
-    rect(x / 2,y / 2, x / 2, y / 2)
+    text("Vier spelers", 180, 175)
   
 def boxValue(colorName, id):
     if id == -1:
@@ -211,7 +183,7 @@ def rematch():
     fill(255)
     rect(75, 50, 200, 75)
     fill(0)
-    text("Wanna play again? Click on me! \n\n If not, click on anywhere else", 95, 75)
+    text("Wil je opnieuw spelen? klik op mij! \n\n zo niet, klik ergens anders", 95, 75)
   
 def result(res, points):
     fill(255)
@@ -225,9 +197,7 @@ def result(res, points):
 
     
 def mousePressed():
-    global chosenAns, data, choose, state, listPlayers, cPlayer, dice
-    global ran
-        #A, B, C, D
+    global chosenAns, data, choose, state, listPlayers, cPlayer, dice, ran
     if state == 'start':
         if 50 < mouseX < 50 + 80 and 50 < mouseY < 50 + 40:
             chosenPlayers = 1
@@ -251,7 +221,7 @@ def mousePressed():
                            2 : {'points' : 0, 'place': 0, 'x': 0, 'y': 30, 'r': 255, 'b': 128, 'g': 0}, 
                            3 : {'points' : 0, 'place': 0, 'x': 30, 'y': 30, 'r': 255, 'b': 0, 'g': 0}}
             
-         # Pure for testing!!!!!
+
         elif 110 < mouseX < 110+ 80 and 450 < mouseY < 450 + 40:
             dice = throwDice()
         if len(listPlayers) > 0:
@@ -261,6 +231,8 @@ def mousePressed():
         cPlayer +=1 
         if cPlayer >= len(listPlayers):
             cPlayer = 0
+        ran = -1
+        chosenAns = ''
         state = 'throw'
             
     elif state == 'card':
@@ -272,37 +244,61 @@ def mousePressed():
             chosenAns = 'C'
         elif 30 < mouseX < 300 and 205 <mouseY < 225:
             chosenAns = 'D'
-        if data[choose][ran]['goed'] == chosenAns:
-            listPlayers[cPlayer]['points'] += data[choose]["punten"]
         
-        if listPlayers[cPlayer]['points'] > 3:
+        print(chosenAns)
+        if data[choose][ran]['goed'] == chosenAns:
+            temp = data[choose]["punten"]
+            print(boardPosBox[listPlayers[cPlayer]['place']]['value'])
+            if boardPosBox[listPlayers[cPlayer]['place']]['value'] == 'times2':
+                print(temp)
+                temp *= 2
+                print(temp)
+            if boardPosBox[listPlayers[cPlayer]['place']]['value'] == 'times3':
+                print(temp)
+                temp *= 3
+                print(temp)
+            listPlayers[cPlayer]['points'] += temp
+        
+        if listPlayers[cPlayer]['points'] > 25:
             state = 'end'
-        else:
+        elif not chosenAns == '':
             state = 'cardResult'
             
     elif state == 'throw':
-        global x, y, choose
-        # if 0 < mouseX < x / 2 and 0 <mouseY < y / 2:
-        #     choose = 'rood'
-        # elif x / 2 < mouseX < x and 0 <mouseY < y / 2:
-        #     choose = 'groen'
-        # elif 0 < mouseX < x / 2 and y / 2 <mouseY < y:
-        #     choose = 'geel'
-        # elif x / 2 < mouseX < x and y / 2 <mouseY < y:
-        #     choose = 'oranje'
-        
-        # Pure for testing!!!!!
+        global x, y, choose              
         if 110 < mouseX < 110+ 80 and 450 < mouseY < 450 + 40:
             dice = throwDice()
-            listPlayers[cPlayer]['place'] += dice
-            
-            ''' HERE COMES THE AUTOPICKER BASED ON YOUR PLACE. SO THE CHOOSE=ORANGE NEEDS TO CHANGE '''
+            throw = dice
+            print(str(listPlayers[cPlayer]['place'] + throw) + '/' + str(len(boardPosBox)))
+            if listPlayers[cPlayer]['place'] + throw >= len(boardPosBox):
+                throw -= len(boardPosBox)
+            listPlayers[cPlayer]['place'] += throw
             
             choose = boardPosBox[listPlayers[cPlayer]['place']]['value']
-            
-            ''' HERE COMES THE AUTOPICKER BASED ON YOUR PLACE. SO THE CHOOSE=ORANGE NEEDS TO CHANGE '''
-            print("THIS IS A TEST ", boardPosBox[listPlayers[cPlayer]['place']]['value'])
-            state = 'card'
+            if choose == 'times2' or choose == 'times3':
+                print('times' + str(choose))
+                c = random.randint(0, 3)
+                print(c)
+                if c == 0:
+                    choose = 'groen'
+                elif c == 1:
+                    choose = 'rood'
+                elif c == 2:
+                    choose = 'geel'
+                elif c == 3:
+                    choose = 'oranje'
+
+            if choose == 'minus4':
+                ran = 0
+                chosenAns = 'A'
+                listPlayers[cPlayer]['points'] -= 4
+                state = 'cardResult'
+            elif choose == 'start':
+                    cPlayer +=1 
+                    if cPlayer >= len(listPlayers):
+                        cPlayer = 0
+            else:
+                state = 'card'
         else:
             state = 'throw'
         
@@ -316,7 +312,7 @@ def mousePressed():
 def draw():
     global data, choose, ran, chosenAns, chosenPlayers, listPlayers, cPlayer, dice
     clear()
-    # print(choose) 
+
     if state != 'start':
         board()
     scoreboard(listPlayers)
@@ -328,24 +324,18 @@ def draw():
         displayDice(dice)
     elif state == 'cardResult':
         if data[choose][ran]['goed'] == chosenAns:
-            print("goed")
-            return result("correct!", data[choose]["punten"])
+            return result("goed", data[choose]["punten"])
             
         else:
             return result('wrong.', 0)
         
-        print(cPlayer)
-        print(listPlayers)
     elif state == 'card':
-        if ran == -1:
-            # print(len(data[choose]) -2)
+        if ran == -1:          
             ran = random.randint(0, len(data[choose]) -2)
         card()
     elif state == 'throw':
-        # colorChoose()
         dice = 0
         diceButton()
-        print(listPlayers)
         showCurrentPlayerTurn(cPlayer)
     elif state == 'end':
         showWinner(cPlayer)
