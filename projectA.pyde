@@ -9,6 +9,7 @@ listPlayers = {}
 cPlayer = 0
 dice = 0
 state = 'start'
+manual = ''
 # start
 # throw
 # card
@@ -112,7 +113,7 @@ def showCurrentPlayerTurn(current_player):
     return text("De speler " + str(current_player + 1) + " is aan de beurt", 100, 380)
 
 def showWinner(current_player):
-    return text("SPEL AFGELOPEN. Speler " + str(current_player + 1) + " heeft GEWONNEN!", 100, 380)
+    return text("SPEL AFGELOPEN. Winnende speler " + str(current_player + 1), 100, 380)
 
 def losers(winner, totalPlayers):
     loser = []
@@ -131,6 +132,11 @@ def scoreboard(listPlayers):
         player_number += 1
         vertical_height += 15
 
+def displayManual():
+    global manual
+    if manual != 0:
+        return image(loadImage("gamemanual.png"),550, 0, 700, 600)
+    
 def players():
     fill(192,192,192)
     rect(50, 50, 80, 40)
@@ -178,26 +184,27 @@ def reset():
     cPlayer = 0
     dice = 0
     state = 'start'
+    manuel = ''
     
 def rematch():
     fill(255)
-    rect(75, 50, 200, 75)
+    rect(75, 50, 220, 75)
     fill(0)
-    text("Wil je opnieuw spelen? klik op mij! \n\n zo niet, klik ergens anders", 95, 75)
+    text("Wil je opnieuw spelen? Klik op mij! \n\n Zo niet, klik ergens anders", 95, 75)
   
 def result(res, points):
     fill(255)
     rect(50,50,250,100)
     fill(0)
-    text("Your answer is " + res, 80, 80)
+    text("Je antwoord is " + res, 80, 80)
     if points == 0:
-        text("You have not recieved any points.", 80, 100)
+        text("Je hebt geen punten gekregen.", 80, 100)
     else:
-        text("You have recieved " + str(points) + " gekregen!", 80, 100)
+        text("Je hebt " + str(points) + " gekregen!", 80, 100)
 
     
 def mousePressed():
-    global chosenAns, data, choose, state, listPlayers, cPlayer, dice, ran
+    global chosenAns, data, choose, state, listPlayers, cPlayer, dice, ran, manuel
     if state == 'start':
         if 50 < mouseX < 50 + 80 and 50 < mouseY < 50 + 40:
             chosenPlayers = 1
@@ -259,7 +266,7 @@ def mousePressed():
                 print(temp)
             listPlayers[cPlayer]['points'] += temp
         
-        if listPlayers[cPlayer]['points'] > 25:
+        if listPlayers[cPlayer]['points'] > 3:
             state = 'end'
         elif not chosenAns == '':
             state = 'cardResult'
@@ -310,7 +317,7 @@ def mousePressed():
         
         
 def draw():
-    global data, choose, ran, chosenAns, chosenPlayers, listPlayers, cPlayer, dice
+    global data, choose, ran, chosenAns, chosenPlayers, listPlayers, cPlayer, dice, manuel
     clear()
 
     if state != 'start':
@@ -319,15 +326,15 @@ def draw():
     displayDice(dice)
     if state == 'start':
         players()
-        # Placeholder area, for testing
         diceButton()
         displayDice(dice)
+        displayManual()
     elif state == 'cardResult':
         if data[choose][ran]['goed'] == chosenAns:
-            return result("goed", data[choose]["punten"])
+            return result("goed.", data[choose]["punten"])
             
         else:
-            return result('wrong.', 0)
+            return result("fout.", 0)
         
     elif state == 'card':
         if ran == -1:          
