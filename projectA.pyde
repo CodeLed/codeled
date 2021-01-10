@@ -70,29 +70,28 @@ def board():
 def card():
     global data, choose, ran
     fill(255,255,255)
-    rect(0,0,300, 250)
+    rect(0,0,350, 250)
     if choose == 'rood':
         fill(255,0,0)
-        rect(0,0, 300,75)
+        rect(0,0, 350,75)
     elif choose == 'geel':
         fill(255,255,0)
-        rect(0,0, 300,75)
+        rect(0,0, 350,75)
     elif choose == 'oranje':
         fill(255,128,0)
-        rect(0,0, 300,75)
+        rect(0,0, 350,75)
     elif choose == 'groen':
         fill(0,128,0)
-        rect(0,0, 300,75)
+        rect(0,0, 350,75)
     else:
         fill(255,0,0)
-        rect(0,0, 300,75)
+        rect(0,0, 350,75)
     fill(0)
-
-    text(data[choose][ran]['vraag'], 30, 40)
-    text(data[choose][ran]['antwoorden']['A'], 30, 100)
-    text(data[choose][ran]['antwoorden']['B'], 30, 140)
-    text(data[choose][ran]['antwoorden']['C'], 30, 180)
-    text(data[choose][ran]['antwoorden']['D'], 30, 220)
+    text(data[choose][ran]['vraag'], 55, 40)
+    text(data[choose][ran]['antwoorden']['A'], 55, 100)
+    text(data[choose][ran]['antwoorden']['B'], 55, 140)
+    text(data[choose][ran]['antwoorden']['C'], 55, 180)
+    text(data[choose][ran]['antwoorden']['D'], 55, 220)
 
 def diceButton():
     fill(192,192,192)
@@ -188,13 +187,13 @@ def rematch():
   
 def result(res, points):
     fill(255)
-    rect(50, 50,250,200)
+    rect(50,50,250,100)
     fill(0)
-    text("je antwoord is " + res, 80, 150)
+    text("Your answer is " + res, 80, 80)
     if points == 0:
-        text("je hebt geen punten verdient", 80, 170)
+        text("You have not recieved any points.", 80, 100)
     else:
-        text("je hebt " + str(points) + " punten gekregen", 80, 170)
+        text("You have recieved " + str(points) + " gekregen!", 80, 100)
 
     
 def mousePressed():
@@ -328,7 +327,7 @@ def draw():
             return result("goed", data[choose]["punten"])
             
         else:
-            return result('fout', 0)
+            return result('wrong.', 0)
         
     elif state == 'card':
         if ran == -1:          
