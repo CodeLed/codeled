@@ -10,11 +10,6 @@ cPlayer = 0
 dice = 0
 state = 'start'
 manual = ''
-# start
-# throw
-# card
-# cardResult
-# end
 x = 1250
 y = 300
 boardX = 350
@@ -22,7 +17,11 @@ boardY = 0
 boardWidth = 900
 boardHeight = 600
 boardPosBox = {}
+
 def setup():
+    """ 
+    Give every square an x, y and value a value and save that in a dict. 
+    """
     global x, y,  boardPosBox, boardX, boardY, boardWidth, boardHeight
     frameRate(20)
     size(x, 600)
@@ -59,6 +58,9 @@ def setup():
         boardPosBox.update(temp)
 
 def board():
+    """ 
+    Load the board and give positions for each pawn on a square. 
+    """
     global boardPosBox, boardX, boardY, boardWidth, boardHeight, listPlayers
     image(loadImage("game.png"), boardX, boardY, boardWidth, boardHeight)
     for i in listPlayers.items():
@@ -69,6 +71,9 @@ def board():
         text(str(i[0]+1), boardPosBox[pos]['x'] + i[1]['x'] + 6, boardPosBox[pos]['y'] + i[1]['y'] + 13)
 
 def card():
+    """
+    The layout of a question card.
+    """
     global data, choose, ran
     fill(255,255,255)
     rect(0,0,350, 250)
@@ -138,6 +143,9 @@ def displayManual():
         return image(loadImage("gamemanual.png"),550, 0, 700, 600)
     
 def players():
+    """
+    The buttons for choosing how many players are participating.
+    """
     fill(192,192,192)
     rect(50, 50, 80, 40)
     fill(255,255,255)
@@ -159,6 +167,9 @@ def players():
     text("Vier spelers", 180, 175)
   
 def boxValue(colorName, id):
+    """ 
+    Here every square gets an unique id and is used in the setup function.
+    """
     if id == -1:
         return 'start'
     elif id == 8:
@@ -175,7 +186,11 @@ def boxValue(colorName, id):
         return 'oranje'
     elif colorName == 'geel':
         return 'rood'
+    
 def reset():
+    """ 
+    Reset every property of the program.
+    """
     global choose, chosenAns, ran, listPlayers, dice, state, cPlayer
     choose = ''
     ran = -1
@@ -193,6 +208,9 @@ def rematch():
     text("Wil je opnieuw spelen? Klik op mij! \n\n Zo niet, klik ergens anders", 95, 75)
   
 def result(res, points):
+    """ 
+    Returns the result of the answer to a question card. 
+    """
     fill(255)
     rect(50,50,250,100)
     fill(0)
@@ -201,9 +219,14 @@ def result(res, points):
         text("Je hebt geen punten gekregen.", 80, 100)
     else:
         text("Je hebt " + str(points) + " gekregen!", 80, 100)
-
     
 def mousePressed():
+    """ 
+    Every section works with a state. The START state is when the game begins. The CARD state is where you have to answer a card.
+    By the CARDRESULT state, the program will return the result of an answer that was given. The THROW state will handle the usage of a dice and
+    will automatically go x amount steps forward and automatically pick the corresponding card of color. The last one is END state where the player
+    can choose to play again or quit.
+    """
     global chosenAns, data, choose, state, listPlayers, cPlayer, dice, ran, manuel
     if state == 'start':
         if 50 < mouseX < 50 + 80 and 50 < mouseY < 50 + 40:
@@ -252,21 +275,15 @@ def mousePressed():
         elif 30 < mouseX < 300 and 205 <mouseY < 225:
             chosenAns = 'D'
         
-        print(chosenAns)
         if data[choose][ran]['goed'] == chosenAns:
             temp = data[choose]["punten"]
-            print(boardPosBox[listPlayers[cPlayer]['place']]['value'])
             if boardPosBox[listPlayers[cPlayer]['place']]['value'] == 'times2':
-                print(temp)
                 temp *= 2
-                print(temp)
             if boardPosBox[listPlayers[cPlayer]['place']]['value'] == 'times3':
-                print(temp)
                 temp *= 3
-                print(temp)
             listPlayers[cPlayer]['points'] += temp
         
-        if listPlayers[cPlayer]['points'] > 3:
+        if listPlayers[cPlayer]['points'] > 24:
             state = 'end'
         elif not chosenAns == '':
             state = 'cardResult'
@@ -276,16 +293,14 @@ def mousePressed():
         if 110 < mouseX < 110+ 80 and 450 < mouseY < 450 + 40:
             dice = throwDice()
             throw = dice
-            print(str(listPlayers[cPlayer]['place'] + throw) + '/' + str(len(boardPosBox)))
+            
             if listPlayers[cPlayer]['place'] + throw >= len(boardPosBox):
                 throw -= len(boardPosBox)
             listPlayers[cPlayer]['place'] += throw
-            
             choose = boardPosBox[listPlayers[cPlayer]['place']]['value']
+            
             if choose == 'times2' or choose == 'times3':
-                print('times' + str(choose))
                 c = random.randint(0, 3)
-                print(c)
                 if c == 0:
                     choose = 'groen'
                 elif c == 1:
@@ -300,6 +315,7 @@ def mousePressed():
                 chosenAns = 'A'
                 listPlayers[cPlayer]['points'] -= 4
                 state = 'cardResult'
+                
             elif choose == 'start':
                     cPlayer +=1 
                     if cPlayer >= len(listPlayers):
@@ -315,15 +331,17 @@ def mousePressed():
         else:
             exit()
         
-        
 def draw():
+    """
+    Here is where most functions are called. It checks what state the program is and the functions are called accordingly.
+    """
     global data, choose, ran, chosenAns, chosenPlayers, listPlayers, cPlayer, dice, manuel
     clear()
-
     if state != 'start':
         board()
     scoreboard(listPlayers)
     displayDice(dice)
+    
     if state == 'start':
         players()
         diceButton()
@@ -332,7 +350,6 @@ def draw():
     elif state == 'cardResult':
         if data[choose][ran]['goed'] == chosenAns:
             return result("goed.", data[choose]["punten"])
-            
         else:
             return result("fout.", 0)
         
@@ -340,10 +357,12 @@ def draw():
         if ran == -1:          
             ran = random.randint(0, len(data[choose]) -2)
         card()
+        
     elif state == 'throw':
         dice = 0
         diceButton()
         showCurrentPlayerTurn(cPlayer)
+        
     elif state == 'end':
         showWinner(cPlayer)
         losers(cPlayer, listPlayers)
