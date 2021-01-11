@@ -100,7 +100,7 @@ def card():
     text(data[choose][ran]['antwoorden']['D'], 55, 220)
 
 def diceButton():
-    fill(192,192,192)
+    fill(0, 28, 184)
     rect(110, 450, 120, 40)
     fill(255,255,255)
     text("Gooi dobbelsteen", 120, 475)
@@ -146,22 +146,22 @@ def players():
     """
     The buttons for choosing how many players are participating.
     """
-    fill(192,192,192)
+    fill(1, 117, 9)
     rect(50, 50, 80, 40)
     fill(255,255,255)
     text("Een spelers", 60, 75)
     
-    fill(192,192,192)
+    fill(218, 230, 5)
     rect(170, 50, 80, 40)
     fill(255,255,255)
     text("Twee spelers", 180, 75)
     
-    fill(192,192,192)
+    fill(230, 181, 5)
     rect(50, 150, 80, 40)
     fill(255,255,255)
     text("Drie spelers", 55, 175)
     
-    fill(192,192,192)
+    fill(230, 5, 5)
     rect(170, 150, 80, 40)
     fill(255,255,255)
     text("Vier spelers", 180, 175)
@@ -335,7 +335,8 @@ def draw():
     """
     Here is where most functions are called. It checks what state the program is and the functions are called accordingly.
     """
-    global data, choose, ran, chosenAns, chosenPlayers, listPlayers, cPlayer, dice, manuel
+    global data, choose, ran, chosenAns, chosenPlayers, listPlayers, cPlayer, dice
+
     clear()
     if state != 'start':
         board()
