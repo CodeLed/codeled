@@ -149,7 +149,7 @@ def players():
     fill(1, 117, 9)
     rect(50, 50, 80, 40)
     fill(255,255,255)
-    text("Een spelers", 60, 75)
+    text("Een speler", 60, 75)
     
     fill(218, 230, 5)
     rect(170, 50, 80, 40)
